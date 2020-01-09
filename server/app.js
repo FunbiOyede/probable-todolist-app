@@ -3,6 +3,8 @@ const cors = require("cors");
 const http = require("http");
 const bodyParser = require("body-parser");
 const { MongoClient, ObjectId } = require("mongodb");
+const dotenv = require("dotenv");
+dotenv.config();
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -12,7 +14,7 @@ app.use(cors());
 const PORT = 5000;
 const server = http.createServer(app);
 MongoClient.connect(
-  "mongodb://localhost:27017",
+  `mongodb://localhost:${process.env.MONGO_PORT}`,
   { useUnifiedTopology: true },
   (err, client) => {
     if (err) {
