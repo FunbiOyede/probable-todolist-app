@@ -14,7 +14,6 @@ const TodoForm = props => {
         task: todo
       })
       .then(res => console.log(res));
-    props.history.push("/todos");
   };
 
   return (

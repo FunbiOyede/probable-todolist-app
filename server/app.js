@@ -27,7 +27,8 @@ MongoClient.connect(
       db.collection("Todos")
         .insertOne({
           todo: task,
-          status: "Not completed"
+          status: "Not completed",
+          isCompleted: false
         })
         .then(() => res.status(200).json("new todo inserted"))
         .catch(err => res.status(400).json(err));
