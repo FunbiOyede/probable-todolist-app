@@ -1,24 +1,18 @@
-import React, { useState } from "react";
-import Header from "./component/Header.jsx";
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "./component/Home";
+import Todo from "./component/Todo";
 import "./App.css";
 
 function App() {
-  const [todos, setTodos] = useState();
-
-  const AddTodo = todo => {
-    setTodos(todo);
-  };
   return (
     <div className="App">
-      <Header />
-      <form>
-        <input
-          type="text"
-          name=""
-          id=""
-          onChange={e => AddTodo(e.target.value)}
-        />
-      </form>
+      <Router>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route exact path="/todos" component={Todo} />
+        </Switch>
+      </Router>
     </div>
   );
 }

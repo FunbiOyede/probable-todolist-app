@@ -24,13 +24,12 @@ MongoClient.connect(
     // add a new todo
     app.post("/todos", (req, res) => {
       const { task } = req.body;
-      const { status } = req.body;
       db.collection("Todos")
         .insertOne({
           todo: task,
-          status: status
+          status: "Not completed"
         })
-        .then(result => res.status(200).json(result))
+        .then(() => res.status(200).json("new todo inserted"))
         .catch(err => res.status(400).json(err));
     });
 
