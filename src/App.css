@@ -38,5 +38,9 @@
 }
 
 .completed {
-  color: aliceblue;
+  text-decoration-line: line-through;
+}
+
+.none {
+  text-decoration-line: none;
 }

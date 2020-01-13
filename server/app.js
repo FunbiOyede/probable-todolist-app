@@ -13,6 +13,7 @@ app.use(cors());
 
 const PORT = 5000;
 const server = http.createServer(app);
+
 MongoClient.connect(
   `mongodb://localhost:${process.env.MONGO_PORT}`,
   { useUnifiedTopology: true },
@@ -47,8 +48,12 @@ MongoClient.connect(
     app.put("/todos/:id", (req, res) => {
       const { id } = req.params;
       const { status } = req.body;
+      const { isCompleted } = req.body;
       db.collection("Todos")
-        .findOneAndUpdate({ _id: ObjectId(id) }, { $set: { status: status } })
+        .findOneAndUpdate(
+          { _id: ObjectId(id) },
+          { $set: { status: status, isCompleted: isCompleted } }
+        )
         .then(() => res.status(200).json("Todo Updated"))
         .catch(err => res.status(400).json(err));
     });

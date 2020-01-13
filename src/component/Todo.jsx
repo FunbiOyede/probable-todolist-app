@@ -4,6 +4,7 @@ import axios from "axios";
 import "../App.css";
 const Todo = () => {
   const [task, setTask] = useState([]);
+  const [toggleComplete, setToggleComplete] = useState(false);
 
   useEffect(() => {
     axios.get("http://localhost:5000/todos").then(res => setTask(res.data));
@@ -16,13 +17,26 @@ const Todo = () => {
    */
 
   const deleteTodo = (index, id) => {
-    console.log(id);
-    console.log(index);
     const Task = [...task];
     Task.splice(index, 1);
     setTask(Task);
     axios
       .delete(`http://localhost:5000/todos/${id}`)
+      .then(res => console.log(res));
+  };
+
+  /**
+   *
+   * @param {number} id
+   * @description updates task
+   */
+  const markAsComplete = id => {
+    setToggleComplete(toggleComplete === false ? true : false);
+    axios
+      .put(`http://localhost:5000/todos/${id}`, {
+        status: "completed",
+        isCompleted: true
+      })
       .then(res => console.log(res));
   };
   return (
@@ -32,8 +46,12 @@ const Todo = () => {
         {task.map((task, index) => (
           <div key={task._id}>
             <div style={{ background: "yellow" }}>
-              <h4>{task.todo}</h4>
-              <h5>{task.status}</h5>
+              <h4 className={toggleComplete ? "completed" : "none"}>
+                {task.todo}
+              </h4>
+              <button onClick={() => markAsComplete(task._id)}>
+                Mark as Completed
+              </button>
               <button onClick={() => deleteTodo(index, task._id)}>
                 Delete
               </button>
