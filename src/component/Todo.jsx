@@ -9,14 +9,22 @@ const Todo = () => {
     axios.get("http://localhost:5000/todos").then(res => setTask(res.data));
   }, []);
 
-  const markCompleteToggler = index => {
+  /**
+   *
+   * @param {number} index
+   * @description deletes task
+   */
+
+  const deleteTodo = (index, id) => {
+    console.log(id);
     console.log(index);
-
     const Task = [...task];
-    console.log(Task[index].isCompleted);
-    Task[index].isCompleted = !Task[index].isCompleted;
+    Task.splice(index, 1);
+    setTask(Task);
+    axios
+      .delete(`http://localhost:5000/todos/${id}`)
+      .then(res => console.log(res));
   };
-
   return (
     <div>
       <Header />
@@ -25,12 +33,10 @@ const Todo = () => {
           <div key={task._id}>
             <div style={{ background: "yellow" }}>
               <h4>{task.todo}</h4>
-              <h5
-                className={task.isCompleted ? "completed" : null}
-                onClick={() => markCompleteToggler(index)}
-              >
-                {task.status}
-              </h5>
+              <h5>{task.status}</h5>
+              <button onClick={() => deleteTodo(index, task._id)}>
+                Delete
+              </button>
             </div>
           </div>
         ))}
