@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import axios from "axios";
 import "../App.css";
+import { Button, Container, Card } from "react-bootstrap";
 const Todo = () => {
   const [task, setTask] = useState([]);
   const [toggleComplete, setToggleComplete] = useState(false);
@@ -42,23 +43,31 @@ const Todo = () => {
   return (
     <div>
       <Header />
-      <div>
-        {task.map((task, index) => (
-          <div key={task._id}>
-            <div style={{ background: "yellow" }}>
-              <h4 className={toggleComplete ? "completed" : "none"}>
-                {task.todo}
-              </h4>
-              <button onClick={() => markAsComplete(task._id)}>
-                Mark as Completed
-              </button>
-              <button onClick={() => deleteTodo(index, task._id)}>
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+      <Container>
+        <div>
+          {task.map((task, index) => (
+            <Card key={task._id} style={{ marginTop: "30px" }}>
+              <Card.Body>
+                <h4 className={toggleComplete ? "completed" : "none"}>
+                  {task.todo}
+                </h4>
+                <Button
+                  onClick={() => markAsComplete(task._id)}
+                  style={{ marginRight: "10px" }}
+                >
+                  Mark as Completed
+                </Button>
+                <Button
+                  variant="danger"
+                  onClick={() => deleteTodo(index, task._id)}
+                >
+                  Delete
+                </Button>
+              </Card.Body>
+            </Card>
+          ))}
+        </div>
+      </Container>
     </div>
   );
 };

@@ -9,10 +9,15 @@ const Header = () => {
     <div>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6">MernStack</Typography>
+          <Link to="/" style={{ color: "white" }}>
+            {" "}
+            Todos App
+          </Link>
           <Typography variant="h6" style={{ marginLeft: "50em" }}>
-            TodosApp
-            <Link to="/todos"> Todos</Link>
+            <Link to="/todos" style={{ color: "white" }}>
+              {" "}
+              Todos
+            </Link>
           </Typography>
         </Toolbar>
       </AppBar>

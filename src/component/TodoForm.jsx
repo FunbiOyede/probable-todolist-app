@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
+import { Container, Form, Button } from "react-bootstrap";
 
 const TodoForm = props => {
   const [todo, setTodo] = useState();
@@ -22,16 +23,22 @@ const TodoForm = props => {
 
   return (
     <div>
-      <form>
-        <input
-          type="text"
-          name=""
-          id=""
-          onChange={e => setTodo(e.target.value)}
-        />
+      <Container>
+        <Form style={{ marginTop: "30px" }}>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label> Add Todo</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter Todo"
+              onChange={e => setTodo(e.target.value)}
+            />
+          </Form.Group>
 
-        <button onClick={e => AddTodo(e)}>Add</button>
-      </form>
+          <Button variant="primary" type="submit" onClick={e => AddTodo(e)}>
+            Submit
+          </Button>
+        </Form>
+      </Container>
     </div>
   );
 };
