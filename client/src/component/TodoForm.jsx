@@ -11,10 +11,10 @@ const TodoForm = props => {
   const AddTodo = e => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/todos", {
+      .post("/todos", {
         task: todo
       })
-      .then(res => console.log(res));
+      .then(res => res);
 
     setTimeout(() => {
       props.history.push("/todos");

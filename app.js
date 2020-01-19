@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const http = require("http");
+const join = require("path").join;
+const resolve = require("path").resolve;
 const bodyParser = require("body-parser");
 const { MongoClient, ObjectId } = require("mongodb");
 const dotenv = require("dotenv");
@@ -11,11 +13,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-const PORT = 5000;
+/* React Production build for server */
+
+app.use(express.static(join(__dirname, "../client/build")));
+
+const PORT = process.env.DEV_PORT;
 const server = http.createServer(app);
 
+app.get("*", (req, res) => {
+  res.sendFile(resolve(__dirname, "client", "build", "index.html"));
+});
 MongoClient.connect(
-  `mongodb://localhost:${process.env.MONGO_PORT}`,
+  process.env.MONGO_URI,
   { useUnifiedTopology: true },
   (err, client) => {
     if (err) {
@@ -69,5 +78,6 @@ MongoClient.connect(
   }
 );
 server.listen(PORT, () => {
+  console.log(__dirname);
   console.log(`sever ready on ${PORT}`);
 });
