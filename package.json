@@ -6,7 +6,7 @@
   "author": "FunbiOyede <oyedetobi49@gmail.com>",
   "engines": {
     "node": "8.16.2",
-    "yarn": "6.13.1"
+    "yarn": "1.17.3"
   },
   "scripts": {
     "server": "nodemon app.js",
