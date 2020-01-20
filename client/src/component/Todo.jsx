@@ -8,7 +8,7 @@ const Todo = () => {
   const [toggleComplete, setToggleComplete] = useState(false);
 
   useEffect(() => {
-    axios.get("/todos").then(res => setTask(res.data));
+    axios.get("api/todos").then(res => setTask(res.data));
   }, []);
 
   /**
@@ -21,7 +21,7 @@ const Todo = () => {
     const Task = [...task];
     Task.splice(index, 1);
     setTask(Task);
-    axios.delete(`/todos/${id}`).then(res => res);
+    axios.delete(`api/todos/${id}`).then(res => res);
   };
 
   /**
@@ -32,7 +32,7 @@ const Todo = () => {
   const markAsComplete = id => {
     setToggleComplete(toggleComplete === false ? true : false);
     axios
-      .put(`/todos/${id}`, {
+      .put(`api/todos/${id}`, {
         status: "completed",
         isCompleted: true
       })

@@ -28,7 +28,7 @@ MongoClient.connect(
     }
     const db = client.db("Todo");
     // add a new todo
-    app.post("/todos", (req, res) => {
+    app.post("api/todos", (req, res) => {
       const { task } = req.body;
       db.collection("Todos")
         .insertOne({
@@ -41,7 +41,7 @@ MongoClient.connect(
     });
 
     // get all todos
-    app.get("/todos", (req, res) => {
+    app.get("api/todos", (req, res) => {
       db.collection("Todos")
         .find()
         .toArray()
@@ -50,7 +50,7 @@ MongoClient.connect(
     });
 
     // update todo
-    app.put("/todos/:id", (req, res) => {
+    app.put("api/todos/:id", (req, res) => {
       const { id } = req.params;
       const { status } = req.body;
       const { isCompleted } = req.body;
@@ -64,7 +64,7 @@ MongoClient.connect(
     });
 
     // delete todo
-    app.delete("/todos/:id", (req, res) => {
+    app.delete("api/todos/:id", (req, res) => {
       const { id } = req.params;
       db.collection("Todos")
         .findOneAndDelete({ _id: ObjectId(id) })

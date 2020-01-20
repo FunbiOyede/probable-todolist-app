@@ -11,7 +11,7 @@ const TodoForm = props => {
   const AddTodo = e => {
     e.preventDefault();
     axios
-      .post("/todos", {
+      .post("api/todos", {
         task: todo
       })
       .then(res => res);
