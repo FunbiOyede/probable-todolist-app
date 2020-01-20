@@ -16,7 +16,7 @@ app.use(cors());
 
 app.use(express.static(join(__dirname, "../client/build")));
 
-const PORT = process.env.DEV_PORT;
+const PORT = process.env.DEV_PORT || 5000;
 const server = http.createServer(app);
 
 app.get("*", (req, res) => {
