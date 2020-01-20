@@ -17,7 +17,7 @@ const TodoForm = props => {
       .then(res => res);
 
     setTimeout(() => {
-      props.history.push("/todos");
+      props.history.push("/todo");
     }, 100);
   };
 

@@ -14,7 +14,7 @@ const Header = () => {
             Todos App
           </Link>
           <Typography variant="h6" style={{ marginLeft: "50em" }}>
-            <Link to="/todos" style={{ color: "white" }}>
+            <Link to="/todo" style={{ color: "white" }}>
               {" "}
               Todos
             </Link>
