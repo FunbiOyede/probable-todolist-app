@@ -4,13 +4,13 @@
   "main": "index.js",
   "repository": "https://github.com/FunbiOyede/probable-todolist-app.git",
   "author": "FunbiOyede <oyedetobi49@gmail.com>",
-  "engines": {
-    "node": "8.16.2",
-    "yarn": "1.17.3"
-  },
   "scripts": {
     "start": "node app.js",
     "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "engines": {
+    "node": "8.16.2",
+    "yarn": "1.17.3"
   },
   "license": "MIT",
   "dependencies": {

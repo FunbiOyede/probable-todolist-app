@@ -14,14 +14,11 @@ app.use(cors());
 
 /* React Production build for server */
 
-app.use(express.static(join(__dirname, "../client/build")));
+app.use(express.static(join(__dirname, "client", "build")));
 
-const PORT = process.env.DEV_PORT || 5000;
+const PORT = process.env.PORT || 5000;
 const server = http.createServer(app);
 
-app.get("*", (req, res) => {
-  res.sendFile(join(__dirname + "../client/build/index.html"));
-});
 MongoClient.connect(
   process.env.MONGO_URI,
   { useUnifiedTopology: true },
@@ -76,7 +73,9 @@ MongoClient.connect(
     });
   }
 );
+app.get("*", (req, res) => {
+  res.sendFile(join(__dirname, "client", "build", "index.html"));
+});
 server.listen(PORT, () => {
-  console.log(__dirname);
   console.log(`sever ready on ${PORT}`);
 });
