@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const http = require("http");
 const join = require("path").join;
-const resolve = require("path").resolve;
 const bodyParser = require("body-parser");
 const { MongoClient, ObjectId } = require("mongodb");
 const dotenv = require("dotenv");
@@ -21,7 +20,7 @@ const PORT = process.env.DEV_PORT;
 const server = http.createServer(app);
 
 app.get("*", (req, res) => {
-  res.sendFile(resolve(__dirname, "client", "build", "index.html"));
+  res.sendFile(join(__dirname + "../client/build/index.html"));
 });
 MongoClient.connect(
   process.env.MONGO_URI,
